@@ -1,56 +1,11 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-  // testing () {
-  //   const promise = new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve('done');
-  //     }, 5000);
-  //   })
 
-  //   promise.then(() => {
-  //     // setState acts like a synchronus call
-  //     this.setState({ qty: this.state.qty + 10 });
-
-  //     this.setState({ qty: this.state.qty + 10 });
-
-  //     this.setState({ qty: this.state.qty + 10 });
-
-  //     console.log('state', this.state);
-  //   });
-  // }
-  increaseQuantity = () => {
-    // this.state.qty += 1;
-    // console.log('this', this.state);
-    // setState form 1
-    // this.setState({
-    //   qty: this.state.qty + 1
-    // }, () => {});
-
-    // setState form 2 - if prevState required use this
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty + 1
-      }
-    });
-  }
-
-  decreaseQuantity = () => {
-    const { qty } = this.state;
-
-    if (qty === 0) {
-      return;
-    }
-    // setState form 2 - if prevState required use this
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty - 1
-      }
-    });
-  }
   render () {
     console.log('this.props', this.props);
     const { price, title, qty } = this.props.product;
+    const {onIncreasQuantity, onDecreasQuantity, product} = this.props;
     return (
       <div className="cart-item">
         {this.props.jsx}
@@ -67,13 +22,13 @@ class CartItem extends React.Component {
               alt="increase"
               className="action-icons"
               src="https://as2.ftcdn.net/v2/jpg/01/26/10/59/1000_F_126105961_6vHCTRX2cPOnQTBvx9OSAwRUapYTEmYA.jpg" 
-              onClick={this.increaseQuantity}
+              onClick={()=> onIncreasQuantity(product)}
             />
             <img
               alt="decrease"
               className="action-icons"
               src="https://as1.ftcdn.net/v2/jpg/03/73/49/86/1000_F_373498649_nBxauQ0ipBSVrVcMpWWVmTpXu3BLvRyY.jpg" 
-              onClick={this.decreaseQuantity}
+              onClick={()=> onDecreasQuantity(product)}
             />
             <img
               alt="delete"
